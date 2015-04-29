@@ -2,9 +2,11 @@ module Main
 where
 import Test.Hspec
 
-reverseCustom :: String -> String
-reverseCustom [] = []
-reverseCustom (a:b) = (reverseCustom b) ++ [a]
+reverseRecursion :: String -> String
+reverseRecursion [] = []
+reverseRecursion (a:b) = (reverseRecursion b) ++ [a]
+-- reverseRecursion l = (reverseRecursion (tail l)) ++ [head l]
+-- reverseRecursion l = (reverseRecursion $ tail l) ++ [head l]
 
 main = hspec $ do
     describe "hello world" $ do
@@ -13,14 +15,14 @@ main = hspec $ do
 
     describe "reverse string" $ do
         it " \"\"-> \"\"" $ do
-          reverseCustom "" `shouldBe` ""
+          reverseRecursion "" `shouldBe` ""
 
         it " a -> a " $ do
-          reverseCustom "a" `shouldBe` "a"
+          reverseRecursion "a" `shouldBe` "a"
 
 
         it " ab -> ba " $ do
-          reverseCustom "ab" `shouldBe` "ba"
+          reverseRecursion "ab" `shouldBe` "ba"
 
         it " abc -> cba " $ do
-          reverseCustom "abc" `shouldBe` "cba"
+          reverseRecursion "abc" `shouldBe` "cba"
